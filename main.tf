@@ -17,12 +17,12 @@ module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
   version = "3.14.3"
 
-  name = "main"
-  cidr = "10.0.0.0/16"
+  name = var.name
+  cidr = var.cidr
 
-  azs             = ["us-east-1a", "us-east-1b"]
-  private_subnets = ["10.0.0.0/19", "10.0.32.0/19"]
-  public_subnets  = ["10.0.64.0/19", "10.0.96.0/19"]
+  azs             = var.azs
+  private_subnets = var.private_subnets
+  public_subnets  = var.public_subnets
 
   enable_nat_gateway     = true
   single_nat_gateway     = true
@@ -32,7 +32,7 @@ module "vpc" {
   enable_dns_support   = true
 
   tags = {
-    Environment = "staging"
+    Environment = var.environment
   }
 }
   
@@ -40,8 +40,8 @@ module "eks" {
   source  = "terraform-aws-modules/eks/aws"
   version = "18.29.0"
 
-  cluster_name    = "my-eks"
-  cluster_version = "1.23"
+  cluster_name    = var.name
+  cluster_version = var.eks_version
 
   cluster_endpoint_private_access = true
   cluster_endpoint_public_access  = true
@@ -52,45 +52,27 @@ module "eks" {
   enable_irsa = true
 
   eks_managed_node_group_defaults = {
-    disk_size = 50
+    disk_size = var.disk_size
   }
 
   eks_managed_node_groups = {
     general = {
-      desired_size = 1
-      min_size     = 1
-      max_size     = 10
+      desired_size = var.desired_size
+      min_size     = var.min_size
+      max_size     = var.max_size
 
       labels = {
         role = "general"
       }
 
-      instance_types = ["t3.small"]
+      instance_types = var.instance_types
       capacity_type  = "ON_DEMAND"
     }
 
-    spot = {
-      desired_size = 1
-      min_size     = 1
-      max_size     = 10
-
-      labels = {
-        role = "spot"
-      }
-
-      taints = [{
-        key    = "market"
-        value  = "spot"
-        effect = "NO_SCHEDULE"
-      }]
-
-      instance_types = ["t3.micro"]
-      capacity_type  = "SPOT"
-    }
   }
 
   tags = {
-    Environment = "staging"
+    Environment = var.environment
   }
 }
   
