@@ -7,7 +7,7 @@ eks_version = "1.21"
 desired_size = "1"
 max_size = "2"
 min_size = "2"
-instance_types = "t2.large"
+instance_types = ["t2.large"]
 disk_size = "30"
 ami_type = "AL2_x86_64"
 
