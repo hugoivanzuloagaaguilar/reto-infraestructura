@@ -61,4 +61,25 @@ variable "ami_type" {
   default     = "AL2_x86_64"
 }
 
+variable "environment " {
+  type        = string
+  default     = "dev"
+}
 
+variable "cidr" {
+  type        = string
+  default     = ""
+}
+
+variable "azs" {
+  type        = list(string)
+  default     = []
+}
+variable "private_subnets" {
+  type        = list(string)
+  default     = []
+}
+variable "public_subnets" {
+  type        = list(string)
+  default     = []
+}
