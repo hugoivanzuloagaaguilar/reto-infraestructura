@@ -4,9 +4,9 @@ aws_secret_key    = "xz0oIXw/LWSrOGb4NAeD7yucAutsGLZVWK3noTLJ"
 
 name = "reto-infraestructura"
 eks_version = "1.23"
-desired_size = 2
-max_size = 3
-min_size = 2
+desired_size = 1
+max_size = 2
+min_size = 1
 instance_types = ["t2.large"]
 disk_size = 30
 ami_type = "AL2_x86_64"
