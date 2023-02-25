@@ -1,4 +1,4 @@
 output "values" {
   description = "Values of EKS"
-  value       = module.eks.cluster_name
+  value       = module.eks.values.cluster_name
 }
