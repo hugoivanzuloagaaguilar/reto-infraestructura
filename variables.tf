@@ -61,21 +61,4 @@ variable "ami_type" {
   default     = "AL2_x86_64"
 }
 
-variable "subnet_private_ids" {
-  description = "Ids de redes privadas"
-  type        = list(string)
-}
 
-variable "subnet_public_ids" {
-  description = "Ids de redes publicas"
-  type        = list(string)
-}
-
-variable "tags" {
-  description = "Etiquetas asignadas a todos los recursos creados por esta plantilla."
-  type        = map(string)
-  default = {
-    "proyecto" = "reto"
-    "tipo" = "eks"
-  }
-}
