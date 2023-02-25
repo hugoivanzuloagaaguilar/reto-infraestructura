@@ -61,7 +61,7 @@ variable "ami_type" {
   default     = "AL2_x86_64"
 }
 
-variable "environment " {
+variable "environment" {
   type        = string
   default     = "dev"
 }
